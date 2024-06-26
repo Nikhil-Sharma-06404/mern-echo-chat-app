@@ -1,16 +1,18 @@
-import React from 'react'
+import React, { useState } from 'react'
+import { Link } from 'react-router-dom'
+import useLogin from '../../hooks/useLogin';
 
 function Login() {
     
-    // const [username,setUsername] = useState("");
-    // const [password,setPassword] = useState("");
+    const [username,setUsername] = useState();
+    const [password,setPassword] = useState("");
 
-    // const {loading,login} = useLogin();
+    const {loading,login} = useLogin();
     
-    // const handleSubmit = async (e) =>{
-    //     e.preventDefault();
-    //     await login({username,password});
-    // }
+    const handleSubmit = async (e) =>{
+        e.preventDefault();
+        await login({username,password});
+    }
 
     return (
         <div className='flex flex-col items-center justify-center min-w-96 mx-auto'>
@@ -20,14 +22,14 @@ function Login() {
                     <span className='text-blue-500'> Echo-Chat</span>
                 </h1>
                 
-                <form >
+                <form onSubmit={handleSubmit} >
                     <div>
                         <label className='label p-2'>
                             <span className='text-base label-text font-bold'>Username</span>
                         </label>
                         <input type='text' placeholder='Enter Username' className='w-full input input-bordered h-10'
-                        //  value={username}
-                        //  onChange={(e)=> setUsername(e.target.value)}
+                         value={username}
+                         onChange={(e)=> setUsername(e.target.value)}
                         />
                     </div>
 
@@ -39,25 +41,20 @@ function Login() {
                             type='password'
                             placeholder='Enter Password'
                             className='w-full input input-bordered h-10'
-                            // value={password}
-                            // onChange={(e)=> setPassword(e.target.value)}
+                            value={password}
+                            onChange={(e)=> setPassword(e.target.value)}
                         />
                     </div>
 
-                    {/* <Link to = '/signup' className='text-sm hover:underline hover:text-blue-600 text-red-500 mt-2 inline-block font-extrabold'>
+                    <Link to = '/signup' className='text-sm hover:underline hover:text-blue-600 text-red-500 mt-2 inline-block font-extrabold'>
                       {"Don't"} have an account?
-                    </Link> */}
+                    </Link>
 
-                    <a href='#' className='text-sm hover:underline hover:text-blue-600 text-red-500 mt-2 inline-block font-extrabold'>
-                      {"Don't"} have an account?
-                    </a>
-                    
                     <div>
                         <button className='btn btn-block btn-sm mt-2'
-                        // disabled={loading}
+                        disabled={loading}
                         >
-                            Login
-                        {/* {loading?<span className='loading loading-spinner'></span>:("Login")} */}
+                        {loading?<span className='loading loading-spinner'></span>:("Login")}
                         </button>
                     </div>
                 </form>
